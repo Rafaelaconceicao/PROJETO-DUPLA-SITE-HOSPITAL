@@ -5,6 +5,8 @@
   --azul: #075579;
   --azul-claro: #218caa;
   --turquesa: #25aaa7;
+  --vermelho: #d34b4b;
+  --vermelho-escuro: #b83d43;
   --bege: #f4eee3;
   --bege-claro: #fbfaf7;
   --texto: #174259;
@@ -64,12 +66,23 @@ body.pagina-cadastro {
 
 .pagina-cadastro h2 {
   margin: 0 auto;
+  position: relative;
   color: var(--azul);
   font-family: Manrope, 'DM Sans', sans-serif;
   font-size: 0;
   font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1.2;
+}
+
+.pagina-cadastro h2::before {
+  display: block;
+  width: 42px;
+  height: 3px;
+  margin: 0 auto 15px;
+  border-radius: 2px;
+  background: var(--vermelho);
+  content: '';
 }
 
 .pagina-cadastro h2::after {
@@ -125,8 +138,7 @@ body.pagina-cadastro {
   color: var(--branco);
 }
 
-.pagina-cadastro > button:first-of-type a::before,
-.pagina-cadastro > button:nth-of-type(3) a::before {
+.pagina-cadastro > button:first-of-type a::before {
   color: var(--turquesa);
 }
 
@@ -138,12 +150,28 @@ body.pagina-cadastro {
   content: '♥  ';
 }
 
+.pagina-cadastro > button:last-of-type {
+  border-color: var(--vermelho);
+  background: var(--vermelho);
+  box-shadow: 0 8px 22px rgba(211, 75, 75, 0.18);
+}
+
+.pagina-cadastro > button:last-of-type a {
+  color: var(--branco);
+}
+
+.pagina-cadastro > button:last-of-type:hover {
+  border-color: var(--vermelho-escuro);
+  background: var(--vermelho-escuro);
+  box-shadow: 0 13px 28px rgba(184, 61, 67, 0.22);
+}
+
 .pagina-cadastro > button:hover a::before {
-  color: #8bd6d1;
+  color: var(--vermelho);
 }
 
 a:focus-visible {
-  outline: 3px solid rgba(37, 170, 167, 0.65);
+  outline: 3px solid rgba(211, 75, 75, 0.55);
   outline-offset: 4px;
 }
 
