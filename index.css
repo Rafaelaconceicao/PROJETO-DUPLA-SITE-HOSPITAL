@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+
+:root {
+  color-scheme: light;
+  --azul: #075579;
+  --azul-claro: #218caa;
+  --turquesa: #25aaa7;
+  --bege: #f4eee3;
+  --bege-claro: #fbfaf7;
+  --texto: #174259;
+  --texto-suave: #65777e;
+  --branco: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body.pagina-cadastro {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  padding-bottom: 56px;
+  background:
+    radial-gradient(ellipse at 82% 55%, rgba(244, 238, 227, 0.7) 0, rgba(244, 238, 227, 0.7) 19%, transparent 19.2%),
+    var(--bege-claro);
+  color: var(--texto);
+  font-family: 'DM Sans', Arial, sans-serif;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+.menu-navegacao {
+  display: flex;
+  min-height: 82px;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2.4vw, 34px);
+  padding: 14px 28px;
+  border-bottom: 1px solid rgba(18, 59, 89, 0.09);
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.menu-navegacao a {
+  color: var(--texto-suave);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.menu-navegacao a:hover,
+.menu-navegacao a:focus-visible {
+  color: var(--turquesa);
+}
+
+.logo {
+  display: block;
+  width: min(390px, 72vw);
+  height: auto;
+  margin: 68px auto 10px;
+}
+
+.pagina-cadastro h2 {
+  margin: 0 auto;
+  color: var(--azul);
+  font-family: Manrope, 'DM Sans', sans-serif;
+  font-size: 0;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.2;
+}
+
+.pagina-cadastro h2::after {
+  display: block;
+  width: fit-content;
+  margin: 10px auto 0;
+  color: var(--texto-suave);
+  content: 'Cuidado que acolhe. Saúde com carinho.';
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+.pagina-cadastro > br {
+  display: none;
+}
+
+.pagina-cadastro > button {
+  min-width: 190px;
+  margin: 35px 7px 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(18, 59, 89, 0.15);
+  border-radius: 7px;
+  background: var(--branco);
+  box-shadow: 0 8px 22px rgba(18, 59, 89, 0.06);
+  font: inherit;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.pagina-cadastro > button:hover {
+  transform: translateY(-3px);
+  border-color: var(--azul);
+  background: var(--azul);
+  box-shadow: 0 13px 28px rgba(18, 59, 89, 0.14);
+}
+
+.pagina-cadastro > button a {
+  display: block;
+  padding: 16px 18px;
+  color: var(--azul);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: color 160ms ease;
+}
+
+.pagina-cadastro > button:hover a,
+.pagina-cadastro > button a:focus-visible {
+  color: var(--branco);
+}
+
+.pagina-cadastro > button:first-of-type a::before,
+.pagina-cadastro > button:nth-of-type(3) a::before {
+  color: var(--turquesa);
+}
+
+.pagina-cadastro > button:first-of-type a::before {
+  content: '+  ';
+}
+
+.pagina-cadastro > button:nth-of-type(3) a::before {
+  content: '♥  ';
+}
+
+.pagina-cadastro > button:hover a::before {
+  color: #8bd6d1;
+}
+
+a:focus-visible {
+  outline: 3px solid rgba(37, 170, 167, 0.65);
+  outline-offset: 4px;
+}
+
+@media (max-width: 760px) {
+  .menu-navegacao {
+    gap: 12px 20px;
+    flex-wrap: wrap;
+    padding: 18px 20px;
+  }
+
+  .menu-navegacao a {
+    font-size: 12px;
+  }
+
+  .logo {
+    margin-top: 52px;
+  }
+
+  .pagina-cadastro > button {
+    min-width: min(230px, calc(100% - 48px));
+    margin: 20px 6px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-navegacao {
+    gap: 12px 16px;
+  }
+
+  .pagina-cadastro h2::after {
+    max-width: 90%;
+    font-size: 14px;
+  }
+
+  .pagina-cadastro > button {
+    display: block;
+    width: calc(100% - 48px);
+    margin: 14px auto 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
