@@ -1,0 +1,212 @@
+:root {
+	color-scheme: light;
+	--azul: #075579;
+	--azul-claro: #218caa;
+	--turquesa: #25aaa7;
+	--vermelho: #d34b4b;
+	--texto: #174259;
+	--texto-suave: #65777e;
+	--borda: #d5e0e5;
+	--branco: #fff;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	min-width: 320px;
+	min-height: 100vh;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	padding: 32px 20px;
+	background:
+		radial-gradient(ellipse at 92% 18%, rgba(211, 75, 75, 0.1), transparent 25%),
+		radial-gradient(ellipse at 8% 82%, rgba(37, 170, 167, 0.14), transparent 27%),
+		#fbfaf7;
+	color: var(--texto);
+	font-family: "DM Sans", "Segoe UI", sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+.form-container {
+	width: min(100%, 450px);
+	padding: 32px;
+	border: 1px solid rgba(7, 85, 121, 0.12);
+	border-radius: 10px;
+	background: var(--branco);
+	box-shadow: 0 16px 42px rgba(18, 59, 89, 0.1);
+}
+
+.form-container h2 {
+	margin: 0 0 24px;
+	color: var(--azul);
+	font-family: Manrope, "DM Sans", "Segoe UI", sans-serif;
+	font-size: 25px;
+	text-align: center;
+}
+
+.form-group {
+	margin-bottom: 18px;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 7px;
+	color: var(--texto);
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.form-group input,
+.form-group select {
+	width: 100%;
+	min-height: 46px;
+	padding: 11px 12px;
+	border: 1px solid var(--borda);
+	border-radius: 6px;
+	background: var(--branco);
+	color: var(--texto);
+	font: inherit;
+	font-size: 15px;
+	transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.form-group input::placeholder {
+	color: #8a9ba2;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+	border-color: var(--azul-claro);
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(33, 140, 170, 0.14);
+}
+
+.error-message {
+	display: none;
+	margin-top: 6px;
+	color: var(--vermelho);
+	font-size: 12px;
+	line-height: 1.4;
+}
+
+.form-group.invalid input,
+.form-group.invalid select {
+	border-color: var(--vermelho);
+	background: #fffafa;
+}
+
+.form-group.invalid .error-message {
+	display: block;
+}
+
+.form-container button {
+	width: 100%;
+	min-height: 48px;
+	margin-top: 4px;
+	padding: 12px 16px;
+	border: 1px solid var(--azul);
+	border-radius: 6px;
+	background: var(--azul);
+	color: var(--branco);
+	font: inherit;
+	font-size: 15px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.form-container button:hover {
+	transform: translateY(-1px);
+	border-color: var(--turquesa);
+	background: var(--turquesa);
+}
+
+.form-container button:focus-visible,
+.btn-voltar:focus-visible {
+	outline: 3px solid rgba(211, 75, 75, 0.45);
+	outline-offset: 3px;
+}
+
+.success-card {
+	margin-top: 20px;
+	padding: 20px;
+	border: 1px solid rgba(37, 170, 167, 0.35);
+	border-radius: 8px;
+	background: #f0faf8;
+	color: var(--texto);
+	text-align: center;
+}
+
+.success-card h3 {
+	margin: 0 0 12px;
+	color: var(--azul);
+}
+
+.success-card p {
+	margin: 8px 0 0;
+	color: var(--texto-suave);
+	font-size: 14px;
+	line-height: 1.55;
+	overflow-wrap: anywhere;
+}
+
+.success-card strong,
+.success-card em {
+	color: var(--texto);
+}
+
+.pagina-inicial {
+	width: min(100%, 450px);
+	margin-top: 18px;
+	text-align: center;
+}
+
+.btn-voltar {
+	display: inline-flex;
+	min-height: 42px;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 10px 14px;
+	border: 1px solid rgba(7, 85, 121, 0.22);
+	border-radius: 6px;
+	color: var(--azul);
+	font-size: 14px;
+	font-weight: 700;
+	text-decoration: none;
+	transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.btn-voltar:hover {
+	border-color: var(--turquesa);
+	background: rgba(37, 170, 167, 0.08);
+}
+
+@media (max-width: 480px) {
+	body {
+		justify-content: flex-start;
+		padding: 24px 16px;
+	}
+
+	.form-container {
+		padding: 24px 20px;
+	}
+
+	.form-container h2 {
+		font-size: 22px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+	}
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento Médico</title>
+    <link rel="stylesheet" href="Cadastrodemonstrativo.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Agende sua Consulta</h2>
+    
+    <form id="agendamentoForm" novalidate>
+        <div class="form-group" id="group-nome">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" placeholder="Digite seu nome">
+            <span class="error-message">Por favor, insira seu nome (mínimo 3 letras).</span>
+        </div>
+
+        <div class="form-group" id="group-email">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="exemplo@email.com">
+            <span class="error-message">Insira um endereço de e-mail válido.</span>
+        </div>
+
+        <div class="form-group" id="group-telefone">
+            <label for="telefone">Telefone (com DDD)</label>
+            <input type="tel" id="telefone" placeholder="Apenas números">
+            <span class="error-message">Insira um telefone válido (mínimo 10 números).</span>
+        </div>
+
+        <div class="form-group" id="group-especialidade">
+            <label for="especialidade">Especialidade / Setor</label>
+            <select id="especialidade">
+                <option value="">Selecione...</option>
+                <option value="Cardiologia">Cardiologia</option>
+                <option value="Centro Cirúrgico">Centro Cirúrgico</option>
+                <option value="Diagnóstico por Imagem">Diagnóstico por Imagem</option>
+                <option value="Maternidade e Ginecologia">Maternidade e Ginecologia</option>
+                <option value="Ortopedia e Traumatologia">Ortopedia e Traumatologia</option>
+                <option value="Pediatria">Pediatria</option>
+            </select>
+            <span class="error-message">Selecione uma especialidade médica ou setor.</span>
+        </div>
+
+        <button type="submit">Confirmar Agendamento</button>
+    </form>
+
+    <div id="mensagemSucesso" class="success-card">
+        <h3>🎉 Agendamento Solicitado!</h3>
+        <p>Olá, <strong id="sucessoNome"></strong>.</p>
+        <p>Sua pré-consulta para <strong><span id="sucessoEspecialidade"></span></strong> foi registrada na própria página.</p>
+        <p>Confirmação enviada para: <br><em id="sucessoEmail"></em></p>
+    </div>
+</div>
+
+<div class="pagina-inicial">
+    <a href="index.html" class="btn-voltar">
+        <span aria-hidden="true">&larr;</span> Voltar para a Página Inicial
+    </a>
+</div>
+
+<script>
+    document.getElementById('agendamentoForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const telefone = document.getElementById('telefone').value.trim();
+        const especialidade = document.getElementById('especialidade').value;
+
+        let formValido = true;
+
+        if (nome.length < 3) { marcarComoInvalido('group-nome'); formValido = false; } else { marcarComoValido('group-nome'); }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) { marcarComoInvalido('group-email'); formValido = false; } else { marcarComoValido('group-email'); }
+
+        const telApenasNumeros = telefone.replace(/\D/g, '');
+        if (telApenasNumeros.length < 10) { marcarComoInvalido('group-telefone'); formValido = false; } else { marcarComoValido('group-telefone'); }
+
+        if (especialidade === "") { marcarComoInvalido('group-especialidade'); formValido = false; } else { marcarComoValido('group-especialidade'); }
+
+        if (formValido) {
+            document.getElementById('sucessoNome').textContent = nome;
+            document.getElementById('sucessoEspecialidade').textContent = especialidade;
+            document.getElementById('sucessoEmail').textContent = email;
+
+            document.getElementById('mensagemSucesso').style.display = 'block';
+            document.getElementById('agendamentoForm').style.display = 'none';
+        }
+    });
+
+    function marcarComoInvalido(id) { document.getElementById(id).classList.add('invalid'); }
+    function marcarComoValido(id) { document.getElementById(id).classList.remove('invalid'); }
+</script>
+
+</body>
+</html>
