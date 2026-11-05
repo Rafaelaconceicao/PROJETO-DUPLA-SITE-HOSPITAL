@@ -7,7 +7,7 @@
 	--texto: #174259;
 	--texto-suave: #65777e;
 	--borda: #d5e0e5;
-	--branco: #fff;
+	--branco: #ffffff;
 }
 
 * {
@@ -34,7 +34,7 @@ body {
 
 .form-container {
 	width: min(100%, 450px);
-	padding: 32px;
+	padding: 30px;
 	border: 1px solid rgba(7, 85, 121, 0.12);
 	border-radius: 10px;
 	background: var(--branco);
@@ -42,7 +42,7 @@ body {
 }
 
 .form-container h2 {
-	margin: 0 0 24px;
+	margin: 0 0 22px;
 	color: var(--azul);
 	font-family: Manrope, "DM Sans", "Segoe UI", sans-serif;
 	font-size: 25px;
@@ -97,7 +97,7 @@ body {
 .form-group.invalid input,
 .form-group.invalid select {
 	border-color: var(--vermelho);
-	background: #fffafa;
+	background-color: #fffafa;
 }
 
 .form-group.invalid .error-message {
@@ -143,7 +143,7 @@ body {
 }
 
 .success-card h3 {
-	margin: 0 0 12px;
+	margin: 0 0 10px;
 	color: var(--azul);
 }
 

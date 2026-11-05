@@ -14,25 +14,25 @@
     <form id="agendamentoForm" novalidate>
         <div class="form-group" id="group-nome">
             <label for="nome">Nome Completo</label>
-            <input type="text" id="nome" placeholder="Digite seu nome">
-            <span class="error-message">Por favor, insira seu nome (mínimo 3 letras).</span>
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="name" required aria-describedby="erro-nome" aria-invalid="false">
+            <span class="error-message" id="erro-nome">Por favor, insira seu nome (mínimo 3 letras).</span>
         </div>
 
         <div class="form-group" id="group-email">
             <label for="email">E-mail</label>
-            <input type="email" id="email" placeholder="exemplo@email.com">
-            <span class="error-message">Insira um endereço de e-mail válido.</span>
+            <input type="email" id="email" name="email" placeholder="exemplo@email.com" autocomplete="email" required aria-describedby="erro-email" aria-invalid="false">
+            <span class="error-message" id="erro-email">Insira um endereço de e-mail válido.</span>
         </div>
 
         <div class="form-group" id="group-telefone">
             <label for="telefone">Telefone (com DDD)</label>
-            <input type="tel" id="telefone" placeholder="Apenas números">
-            <span class="error-message">Insira um telefone válido (mínimo 10 números).</span>
+            <input type="tel" id="telefone" name="telefone" placeholder="Apenas números" autocomplete="tel" inputmode="numeric" required aria-describedby="erro-telefone" aria-invalid="false">
+            <span class="error-message" id="erro-telefone">Insira um telefone válido (mínimo 10 números).</span>
         </div>
 
         <div class="form-group" id="group-especialidade">
             <label for="especialidade">Especialidade / Setor</label>
-            <select id="especialidade">
+            <select id="especialidade" name="especialidade" required aria-describedby="erro-especialidade" aria-invalid="false">
                 <option value="">Selecione...</option>
                 <option value="Cardiologia">Cardiologia</option>
                 <option value="Centro Cirúrgico">Centro Cirúrgico</option>
@@ -41,13 +41,13 @@
                 <option value="Ortopedia e Traumatologia">Ortopedia e Traumatologia</option>
                 <option value="Pediatria">Pediatria</option>
             </select>
-            <span class="error-message">Selecione uma especialidade médica ou setor.</span>
+            <span class="error-message" id="erro-especialidade">Selecione uma especialidade médica ou setor.</span>
         </div>
 
         <button type="submit">Confirmar Agendamento</button>
     </form>
 
-    <div id="mensagemSucesso" class="success-card">
+    <div id="mensagemSucesso" class="success-card" role="status" aria-live="polite">
         <h3>🎉 Agendamento Solicitado!</h3>
         <p>Olá, <strong id="sucessoNome"></strong>.</p>
         <p>Sua pré-consulta para <strong><span id="sucessoEspecialidade"></span></strong> foi registrada na própria página.</p>
@@ -92,8 +92,17 @@
         }
     });
 
-    function marcarComoInvalido(id) { document.getElementById(id).classList.add('invalid'); }
-    function marcarComoValido(id) { document.getElementById(id).classList.remove('invalid'); }
+    function marcarComoInvalido(id) {
+        const grupo = document.getElementById(id);
+        grupo.classList.add('invalid');
+        grupo.querySelector('input, select').setAttribute('aria-invalid', 'true');
+    }
+
+    function marcarComoValido(id) {
+        const grupo = document.getElementById(id);
+        grupo.classList.remove('invalid');
+        grupo.querySelector('input, select').setAttribute('aria-invalid', 'false');
+    }
 </script>
 
 </body>
