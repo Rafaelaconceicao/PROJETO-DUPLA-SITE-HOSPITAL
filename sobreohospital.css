@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+
+:root {
+  color-scheme: light;
+  --azul: #075579;
+  --azul-claro: #218caa;
+  --turquesa: #25aaa7;
+  --vermelho: #d34b4b;
+  --bege-claro: #fbfaf7;
+  --texto: #174259;
+  --texto-suave: #65777e;
+  --branco: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding-bottom: 56px;
+  overflow-x: hidden;
+  background-color: var(--bege-claro);
+  background-image:
+    radial-gradient(ellipse at 92% 14%, rgba(211, 75, 75, 0.18) 0, transparent 26%),
+    radial-gradient(ellipse at 8% 72%, rgba(37, 170, 167, 0.2) 0, transparent 30%),
+    linear-gradient(rgba(251, 250, 247, 0.35), rgba(251, 250, 247, 0.5)),
+    url('assets/hospital.png');
+  background-position: center, center, center, center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: var(--texto);
+  font-family: 'DM Sans', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.menu-navegacao {
+  display: flex;
+  min-height: 82px;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2.4vw, 34px);
+  padding: 14px 28px;
+  border-bottom: 1px solid rgba(18, 59, 89, 0.09);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.menu-navegacao a {
+  color: var(--texto-suave);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.menu-navegacao a:hover,
+.menu-navegacao a:focus-visible,
+.menu-navegacao a[aria-current="page"] {
+  color: var(--turquesa);
+}
+
+.menu-navegacao a[aria-current="page"] {
+  padding: 9px 13px;
+  border-radius: 20px;
+  background: rgba(37, 170, 167, 0.12);
+}
+
+.conteudo-sobre {
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.cabecalho-sobre {
+  padding: 52px 0 34px;
+  text-align: center;
+}
+
+.sobretitulo,
+.etiqueta {
+  margin: 0 0 10px;
+  color: var(--azul-claro);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cabecalho-sobre h1 {
+  margin: 0;
+  color: var(--azul);
+  font-family: Manrope, 'DM Sans', Arial, sans-serif;
+  font-size: clamp(30px, 5vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.cabecalho-sobre h1::after {
+  display: block;
+  width: 42px;
+  height: 3px;
+  margin: 16px auto;
+  border-radius: 2px;
+  background: var(--vermelho);
+  content: '';
+}
+
+.botao-inicio {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 12px 20px;
+  border: 1px solid var(--azul);
+  border-radius: 7px;
+  background: var(--azul);
+  box-shadow: 0 7px 18px rgba(7, 85, 121, 0.16);
+  color: var(--branco);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.botao-inicio:hover,
+.botao-inicio:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--vermelho);
+  background: var(--vermelho);
+  box-shadow: 0 10px 22px rgba(211, 75, 75, 0.2);
+}
+
+.cabecalho-sobre > p:last-child {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 17px;
+}
+
+.apresentacao {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: clamp(28px, 5vw, 58px);
+  padding: clamp(22px, 4vw, 42px);
+  border: 1px solid rgba(37, 170, 167, 0.24);
+  border-left: 5px solid var(--turquesa);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.91);
+  box-shadow: 0 12px 32px rgba(18, 59, 89, 0.08);
+}
+
+.texto-historia h2 {
+  margin: 0 0 18px;
+  color: var(--azul);
+  font-family: Manrope, 'DM Sans', Arial, sans-serif;
+  font-size: clamp(24px, 3vw, 32px);
+  letter-spacing: -0.035em;
+  line-height: 1.25;
+}
+
+.texto-historia > p:not(.etiqueta) {
+  margin: 0 0 14px;
+  color: var(--texto-suave);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.foto-hospital {
+  margin: 0;
+}
+
+.foto-hospital img {
+  display: block;
+  width: 100%;
+  min-height: 280px;
+  max-height: 390px;
+  border: 3px solid var(--branco);
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 14px 30px rgba(7, 85, 121, 0.24);
+}
+
+.foto-hospital figcaption {
+  margin-top: 10px;
+  color: var(--texto-suave);
+  font-size: 12px;
+  text-align: center;
+}
+
+.grade-institucional {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.cartao-institucional {
+  padding: 24px;
+  border: 1px solid rgba(37, 170, 167, 0.28);
+  border-top: 4px solid var(--turquesa);
+  border-radius: 9px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(225, 246, 241, 0.95));
+  box-shadow: 0 8px 22px rgba(18, 59, 89, 0.05);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.cartao-estrutura {
+  border-color: rgba(211, 75, 75, 0.24);
+  border-top-color: var(--vermelho);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(252, 234, 229, 0.95));
+}
+
+.cartao-institucional:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 13px 28px rgba(18, 59, 89, 0.12);
+}
+
+.cartao-institucional h2 {
+  margin: 0 0 12px;
+  color: var(--azul);
+  font-family: Manrope, 'DM Sans', Arial, sans-serif;
+  font-size: 20px;
+}
+
+.cartao-institucional h3 {
+  margin: 18px 0 6px;
+  color: var(--azul-claro);
+  font-family: Manrope, 'DM Sans', Arial, sans-serif;
+  font-size: 15px;
+}
+
+.cartao-institucional h2 + h3 {
+  margin-top: 0;
+}
+
+.cartao-institucional > p,
+.cartao-institucional li {
+  color: var(--texto-suave);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.cartao-institucional > p {
+  margin: 0;
+}
+
+.cartao-institucional ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 19px;
+}
+
+.cartao-institucional li::marker {
+  color: var(--turquesa);
+}
+
+.cartao-institucional li strong,
+.atendimento strong {
+  color: var(--texto);
+}
+
+.cartao-institucional .atendimento {
+  margin-top: 14px;
+}
+
+.informacoes-legais {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 28px;
+  margin-top: 22px;
+  padding: 17px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(7, 85, 121, 0.14);
+  background: rgba(225, 241, 246, 0.92);
+}
+
+.informacoes-legais p {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 13px;
+}
+
+.informacoes-legais strong {
+  color: var(--azul);
+}
+
+a:focus-visible {
+  outline: 3px solid rgba(211, 75, 75, 0.55);
+  outline-offset: 4px;
+}
+
+@media (max-width: 760px) {
+  .menu-navegacao {
+    gap: 12px 20px;
+    flex-wrap: wrap;
+    padding: 18px 20px;
+  }
+
+  .menu-navegacao a {
+    font-size: 12px;
+  }
+
+  .apresentacao {
+    grid-template-columns: 1fr;
+  }
+
+  .foto-hospital img {
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 520px) {
+  .conteudo-sobre {
+    width: calc(100% - 32px);
+  }
+
+  .cabecalho-sobre {
+    padding-top: 40px;
+  }
+
+  .cabecalho-sobre > p:last-child {
+    font-size: 15px;
+  }
+
+  .apresentacao {
+    gap: 18px;
+    padding: 20px;
+  }
+
+  .foto-hospital img {
+    min-height: 210px;
+  }
+
+  .grade-institucional {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
