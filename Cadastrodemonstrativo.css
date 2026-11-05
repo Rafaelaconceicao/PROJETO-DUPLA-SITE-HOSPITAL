@@ -133,6 +133,7 @@ body {
 }
 
 .success-card {
+	display: none;
 	margin-top: 20px;
 	padding: 20px;
 	border: 1px solid rgba(37, 170, 167, 0.35);
