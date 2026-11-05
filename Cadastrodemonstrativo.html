@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento Médico</title>
+    <link rel="stylesheet" href="Cadastrodemonstrativo.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .form-container { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 100%; max-width: 450px; }
+        h2 { color: #2c3e50; margin-bottom: 20px; text-align: center; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 6px; color: #34495e; font-weight: 600; font-size: 14px; }
+        input, select { width: 100%; padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 15px; }
+        input:focus, select:focus { outline: none; border-color: #3498db; }
+        .error-message { color: #e74c3c; font-size: 12px; margin-top: 4px; display: none; }
+        .form-group.invalid input, .form-group.invalid select { border-color: #e74c3c; background-color: #fdf2f2; }
+        .form-group.invalid .error-message { display: block; }
+        button { width: 100%; background-color: #3498db; color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        button:hover { background-color: #2980b9; }
+        .success-card { display: none; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 20px; border-radius: 8px; text-align: center; margin-top: 20px; }
+        .success-card h3 { margin-bottom: 10px; }
+        .success-card p { font-size: 14px; line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Agende sua Consulta</h2>
+    
+    <form id="agendamentoForm" novalidate>
+        <div class="form-group" id="group-nome">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="name" required aria-describedby="erro-nome" aria-invalid="false">
+            <span class="error-message" id="erro-nome">Por favor, insira seu nome (mínimo 3 letras).</span>
+        </div>
+
+        <div class="form-group" id="group-email">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="exemplo@email.com" autocomplete="email" required aria-describedby="erro-email" aria-invalid="false">
+            <span class="error-message" id="erro-email">Insira um endereço de e-mail válido.</span>
+        </div>
+
+        <div class="form-group" id="group-telefone">
+            <label for="telefone">Telefone (com DDD)</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="Apenas números" autocomplete="tel" inputmode="numeric" required aria-describedby="erro-telefone" aria-invalid="false">
+            <span class="error-message" id="erro-telefone">Insira um telefone válido (mínimo 10 números).</span>
+        </div>
+
+        <div class="form-group" id="group-especialidade">
+            <label for="especialidade">Especialidade / Setor</label>
+            <select id="especialidade" name="especialidade" required aria-describedby="erro-especialidade" aria-invalid="false">
+                <option value="">Selecione...</option>
+                <option value="Cardiologia">Cardiologia</option>
+                <option value="Centro Cirúrgico">Centro Cirúrgico</option>
+                <option value="Diagnóstico por Imagem">Diagnóstico por Imagem</option>
+                <option value="Maternidade e Ginecologia">Maternidade e Ginecologia</option>
+                <option value="Ortopedia e Traumatologia">Ortopedia e Traumatologia</option>
+                <option value="Pediatria">Pediatria</option>
+            </select>
+            <span class="error-message" id="erro-especialidade">Selecione uma especialidade médica ou setor.</span>
+        </div>
+
+        <button type="submit">Confirmar Agendamento</button>
+    </form>
+
+    <div id="mensagemSucesso" class="success-card" role="status" aria-live="polite">
+        <h3>🎉 Agendamento Solicitado!</h3>
+        <p>Olá, <strong id="sucessoNome"></strong>.</p>
+        <p>Sua pré-consulta para <strong><span id="sucessoEspecialidade"></span></strong> foi registrada na própria página.</p>
+        <p>Confirmação enviada para: <br><em id="sucessoEmail"></em></p>
+    </div>
+</div>
+
+<div class="pagina-inicial">
+    <a href="index.html" class="btn-voltar">
+        <span aria-hidden="true">&larr;</span> Voltar para a Página Inicial
+    </a>
+</div>
+
+<script>
+    document.getElementById('agendamentoForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const telefone = document.getElementById('telefone').value.trim();
+        const especialidade = document.getElementById('especialidade').value;
+
+        let formValido = true;
+
+        if (nome.length < 3) { marcarComoInvalido('group-nome'); formValido = false; } else { marcarComoValido('group-nome'); }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) { marcarComoInvalido('group-email'); formValido = false; } else { marcarComoValido('group-email'); }
+
+        const telApenasNumeros = telefone.replace(/\D/g, '');
+        if (telApenasNumeros.length < 10) { marcarComoInvalido('group-telefone'); formValido = false; } else { marcarComoValido('group-telefone'); }
+
+        if (especialidade === "") { marcarComoInvalido('group-especialidade'); formValido = false; } else { marcarComoValido('group-especialidade'); }
+
+        if (formValido) {
+            document.getElementById('sucessoNome').textContent = nome;
+            document.getElementById('sucessoEspecialidade').textContent = especialidade;
+            document.getElementById('sucessoEmail').textContent = email;
+
+            document.getElementById('mensagemSucesso').style.display = 'block';
+            document.getElementById('agendamentoForm').style.display = 'none';
+        }
+    });
+
+    function marcarComoInvalido(id) {
+        const grupo = document.getElementById(id);
+        grupo.classList.add('invalid');
+        grupo.querySelector('input, select').setAttribute('aria-invalid', 'true');
+    }
+
+    function marcarComoValido(id) {
+        const grupo = document.getElementById(id);
+        grupo.classList.remove('invalid');
+        grupo.querySelector('input, select').setAttribute('aria-invalid', 'false');
+    }
+</script>
+
+</body>
+</html>
