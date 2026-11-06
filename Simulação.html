@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação de Agendamento</title>
+    <link rel="stylesheet" href="simulação.css">
+</head>
+<body>
+
+<div class="form-container">
+    <div id="formBlock">
+        <h2>Simulação de Agendamento</h2>
+        
+        <form id="agendamentoForm" novalidate>
+            <div class="form-group" id="group-nome">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" placeholder="Digite seu nome">
+                <span class="error-message">Por favor, insira seu nome (mínimo 3 letras).</span>
+            </div>
+
+            <div class="form-group" id="group-especialidade">
+                <label for="especialidade">Especialidade / Setor</label>
+                <select id="especialidade">
+                    <option value="">Selecione...</option>
+                    <option value="Cardiologia">Cardiologia</option>
+                    <option value="Centro Cirúrgico">Centro Cirúrgico</option>
+                    <option value="Cirurgia Geral">Cirurgia Geral</option>
+                    <option value="Diagnóstico por Imagem">Diagnóstico por Imagem</option>
+                    <option value="Maternidade e Ginecologia">Maternidade e Ginecologia</option>
+                    <option value="Neurologia">Neurologia</option>
+                    <option value="Ortopedia e Traumatologia">Ortopedia e Traumatologia</option>
+                    <option value="Pediatria">Pediatria</option>
+                </select>
+                <span class="error-message">Selecione uma especialidade médica ou setor.</span>
+            </div>
+
+            <div class="row">
+                <div class="form-group" id="group-data">
+                    <label for="data">Data</label>
+                    <input type="date" id="data">
+                    <span class="error-message">Escolha hoje ou uma data futura.</span>
+                </div>
+
+                <div class="form-group" id="group-horario">
+                    <label for="horario">Horário</label>
+                    <select id="horario">
+                        <option value="">--:--</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                    </select>
+                    <span class="error-message">Escolha um horário.</span>
+                </div>
+            </div>
+
+            <button type="submit">Simular Agendamento</button>
+        </form>
+    </div>
+
+    <!-- Tela de Resumo da Simulação -->
+    <div id="mensagemSucesso" class="simulation-card">
+        <h3>📊 Resumo da Simulação</h3>
+        
+        <div class="simulation-details">
+            <p><strong>Paciente:</strong> <span id="resumoNome"></span></p>
+            <p><strong>Setor/Especialidade:</strong> <span id="resumoEspecialidade"></span></p>
+            <p><strong>Data Escolhida:</strong> <span id="resumoData"></span></p>
+            <p><strong>Horário Escolhido:</strong> <span id="resumoHorario">h</span></p>
+        </div>
+
+        <p class="alert-info">⚠️ Atenção: Esta é apenas uma demonstração visual. Nenhuma consulta real foi criada ou salva no sistema.</p>
+        <button class="btn-voltar" type="button" onclick="novaSimulacao()">Nova Simulação</button>
+    </div>
+</div>
+
+<a class="link-inicio" href="index.html">
+    <span aria-hidden="true">&larr;</span> Voltar para a página inicial
+</a>
+
+<script>
+    const dataAtual = new Date();
+    const hoje = [
+        dataAtual.getFullYear(),
+        String(dataAtual.getMonth() + 1).padStart(2, '0'),
+        String(dataAtual.getDate()).padStart(2, '0')
+    ].join('-');
+    document.getElementById('data').setAttribute('min', hoje);
+
+    document.getElementById('agendamentoForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        const nome = document.getElementById('nome').value.trim();
+        const agendaData = document.getElementById('data').value;
+        const horario = document.getElementById('horario').value;
+        const especialidade = document.getElementById('especialidade').value;
+
+        let formValido = true;
+
+        if (nome.length < 3) { marcarComoInvalido('group-nome'); formValido = false; } else { marcarComoValido('group-nome'); }
+        if (especialidade === "") { marcarComoInvalido('group-especialidade'); formValido = false; } else { marcarComoValido('group-especialidade'); }
+        if (!agendaData || agendaData < hoje) { marcarComoInvalido('group-data'); formValido = false; } else { marcarComoValido('group-data'); }
+        if (horario === "") { marcarComoInvalido('group-horario'); formValido = false; } else { marcarComoValido('group-horario'); }
+
+        if (formValido) {
+            // Formata a data de AAAA-MM-DD para DD/MM/AAAA
+            const dataFormatada = agendaData.split('-').reverse().join('/');
+
+            // Alimenta o card de resumo
+            document.getElementById('resumoNome').textContent = nome;
+            document.getElementById('resumoEspecialidade').textContent = especialidade;
+            document.getElementById('resumoData').textContent = dataFormatada;
+            document.getElementById('resumoHorario').textContent = horario;
+
+            // Alterna as telas do container
+            document.getElementById('mensagemSucesso').style.display = 'block';
+            document.getElementById('formBlock').style.display = 'none';
+        }
+    });
+
+    function marcarComoInvalido(id) { document.getElementById(id).classList.add('invalid'); }
+    function marcarComoValido(id) { document.getElementById(id).classList.remove('invalid'); }
+
+    function novaSimulacao() {
+        document.getElementById('agendamentoForm').reset();
+        document.getElementById('mensagemSucesso').style.display = 'none';
+        document.getElementById('formBlock').style.display = 'block';
+    }
+</script>
+
+<a href="index.html">Página Inicial</a>
+</body>
+</html>
